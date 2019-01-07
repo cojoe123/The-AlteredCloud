@@ -1,0 +1,35 @@
+{% extends 'stocks/base.html' %}
+
+
+{% load static %}
+
+{% block title %}The AC | {{book.quote.symbol}} Stock {% endblock %}
+
+{% block stock_info %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<link rel='stylesheet' href="{% static '/css/stock_info.css' %}">
+<script type="text/javascript" src="{% static '/js/stock_table.js' %}"></script>
+
+{% endblock %}
+
+
+{% block content %}
+  <div id="header-msg">
+      <h1>{{book.quote.companyName}}</h1>
+      <h3>{{company_info.description}}</h3>
+
+      <p>Latest opening price is: ${{book.quote.open}}</p>
+      <!-- <p>Past 20 days:</p> -->
+  </div>
+
+  <!-- To display chart with stock data -->
+  <!-- <div class="chart-container">
+    <div class="stock-chart">
+      <canvas id="myChart" width="20" height="15"></canvas>
+      <script src="{% static 'js/stock_chart.js' %}"></script>
+    </div>
+  </div> -->
+{% endblock %}

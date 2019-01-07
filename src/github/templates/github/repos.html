@@ -1,0 +1,23 @@
+{% extends 'github/repo_base.html' %}
+
+{% block content %}
+
+<h1>List of projects on my GitHub</h1>
+
+    <div id="repo-container">
+        {% for item in info %}
+            <p>
+                {{item.name}}
+                <br />
+                <br />
+                {{item.description}}
+                <br />
+                <br />
+                <a href="https://github.com/cojoe123/{{item.name}}" rel="noopener noreferrer" target="_blank">View on GitHub</a>
+            </p>
+        {% empty %}
+            Nothing Found
+        {% endfor %}
+    </div>
+
+{% endblock %}

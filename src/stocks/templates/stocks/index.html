@@ -1,0 +1,140 @@
+{% extends 'stocks/base.html' %}
+
+{% block title %}
+The AC | Stock Market Trends
+{% endblock %}
+
+{% block content %}
+
+      <div id="header-msg">
+        <h1>This is site is used to view the latest trends of what is happening on the Stock Market</h1>
+      </div>
+
+      <!-- <form action="#" method="post"> {% csrf_token %}
+
+      </form> -->
+
+      <form name="form" action="{% url 'search' %}" method="POST"> {% csrf_token %}
+        <div class="search-box">
+            <input class="search-txt" type="text" name="search" placeholder="Search by ticker">
+            <button class="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+        </div>
+      </form>
+
+      <div class="container">
+        <section class="most-active">
+          <h3>The Day's Trending Stocks:</h3>
+          <div class="table-active">
+            <div class="tbl-header">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <thead>
+                  <tr>
+                      <!-- <th>Logo</th> -->
+                      <th>Company</th>
+                      <th>Ticker</th>
+                      <th>Latest Price</th>
+                      <th>Change</th>
+                      <th></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                  {% for item in active %}
+                  <tr class="data">
+                      <td>{{item.companyName}}</td>
+                      <td>{{item.symbol}}</td>
+                      <td>{{item.latestPrice}}</td>
+                      <td>{{item.change}}</td>
+                      <td><a href="{% url 'company' ticker=item.symbol %}">Details</a></td>
+                    {% empty %}
+                      <h2>Nothin Found, Possible API Issue</h2>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="gainers">
+          <h3>The Day's Gainers:</h3>
+          <div class="table-gainers">
+            <div class="tbl-header">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <thead>
+                  <tr>
+                      <!-- <th>Logo</th> -->
+                      <th>Company</th>
+                      <th>Ticker</th>
+                      <th>Latest Price</th>
+                      <th>Change</th>
+                      <th></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                  {% for item in gainers %}
+                  <tr class="data">
+                      <td>{{item.companyName}}</td>
+                      <td>{{item.symbol}}</td>
+                      <td>{{item.latestPrice}}</td>
+                      <td>{{item.change}}</td>
+                      <td><a href="{% url 'company' ticker=item.symbol %}">Details</a></td>
+                    {% empty %}
+                    <h2>Nothin Found, Possible API Issue</h2>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="losers">
+          <h3>The Day's Losers:</h3>
+          <div class="table-losers">
+            <div class="tbl-header">
+              <table cellspacing="0" cellpadding="0" border="0">
+                <thead>
+                  <tr>
+                      <!-- <th>Logo</th> -->
+                      <th>Company</th>
+                      <th>Ticker</th>
+                      <th>Latest Price</th>
+                      <th>Change</th>
+                      <th></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                  {% for item in losers %}
+                  <tr class="data">
+                      <td>{{item.companyName}}</td>
+                      <td>{{item.symbol}}</td>
+                      <td>{{item.latestPrice}}</td>
+                      <td>{{item.change}}</td>
+                      <td><a href="{% url 'company' ticker=item.symbol %}">Details</a></td>
+                    {% empty %}
+                    <h2>Nothin Found, Possible API Issue</h2>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+{% endblock %}
